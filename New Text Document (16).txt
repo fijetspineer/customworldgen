@@ -1,0 +1,74 @@
+@startuml Hausdatenbank ERD
+
+!define TABLE(x) entity x << (T,#FFAAAA) >>
+!define PRIMARY_KEY(x) <b><u>x</u></b>
+!define FOREIGN_KEY(x) <i>x</i>
+!define NOT_NULL(x) <b>x</b>
+
+skinparam linetype ortho
+skinparam entity {
+    BackgroundColor #F5F5DC
+    BorderColor #8B4513
+    ArrowColor #8B4513
+}
+
+title Hausdatenbank - Entity Relationship Diagram
+
+TABLE(persons) {
+    PRIMARY_KEY(id) : INT <<AUTO_INCREMENT>>
+    --
+    NOT_NULL(name) : VARCHAR(255)
+    NOT_NULL(mobile) : VARCHAR(50)
+    NOT_NULL(email) : VARCHAR(255) <<UNIQUE>>
+    NOT_NULL(person_type) : ENUM
+    dossier : TEXT
+}
+
+note right of persons::person_type
+  ENUM Werte:
+  'Gast', 'Besitzer', 
+  'Familie', 'Freund', 
+  'Kunde', 'Anbieter', 
+  'Kursteilnehmer'
+end note
+
+TABLE(locations) {
+    PRIMARY_KEY(id) : INT <<AUTO_INCREMENT>>
+    --
+    NOT_NULL(name) : VARCHAR(100) <<UNIQUE>>
+    description : VARCHAR(255)
+}
+
+TABLE(visits) {
+    PRIMARY_KEY(id) : INT <<AUTO_INCREMENT>>
+    --
+    FOREIGN_KEY(person_id) : INT <<FK, NOT NULL>>
+    NOT_NULL(visit_date) : DATE
+    NOT_NULL(visit_time) : TIME
+    NOT_NULL(duration) : INT
+    NOT_NULL(theme) : VARCHAR(255)
+    content : VARCHAR(1000)
+    NOT_NULL(visit_type) : ENUM
+    NOT_NULL(rfid_chip) : VARCHAR(50) <<UNIQUE>>
+}
+
+note right of visits::visit_type
+  ENUM Werte:
+  'Privat', 'Offiziell'
+end note
+
+TABLE(movements) {
+    PRIMARY_KEY(id) : INT <<AUTO_INCREMENT>>
+    --
+    FOREIGN_KEY(visit_id) : INT <<FK, NOT NULL>>
+    FOREIGN_KEY(location_id) : INT <<FK, NOT NULL>>
+    NOT_NULL(entry_time) : DATETIME
+    exit_time : DATETIME
+}
+
+' Beziehungen / Relationships
+persons ||--o{ visits : "hat (1:n)"
+visits ||--o{ movements : "erzeugt (1:n)"
+locations ||--o{ movements : "wird besucht (1:n)"
+
+@enduml
