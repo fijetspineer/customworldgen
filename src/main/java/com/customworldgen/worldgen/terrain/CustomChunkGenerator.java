@@ -87,8 +87,8 @@ public class CustomChunkGenerator extends ChunkGenerator {
 
     @Override
     public int getHeight(int x, int z, Heightmap.Type heightmap, HeightLimitView world, NoiseConfig noiseConfig) {
-        int terrainHeight = computeSurfaceHeight(x, z, noiseConfig.getLegacyWorldSeed());
-        return Math.min(terrainHeight, world.getTopYInclusive());
+        int terrainHeight = computeSurfaceHeight(x, z, this.worldSeed);
+        return Math.min(terrainHeight, world.getTopY() - 1);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
         int height = world.getHeight();
         BlockState[] column = new BlockState[height];
 
-        int surfaceY = computeSurfaceHeight(x, z, noiseConfig.getLegacyWorldSeed());
+        int surfaceY = computeSurfaceHeight(x, z, this.worldSeed);
         BlockState stone = Blocks.STONE.getDefaultState();
         BlockState air = Blocks.AIR.getDefaultState();
         BlockState water = Blocks.WATER.getDefaultState();
@@ -124,8 +124,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
     public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig,
                                                    StructureAccessor structureAccessor, Chunk chunk) {
         return CompletableFuture.supplyAsync(() -> {
-            long seed = noiseConfig.getLegacyWorldSeed();
-            this.worldSeed = seed;
+            long seed = this.worldSeed;
 
             WorldGenConfig.TerrainConfig terrain = config.getTerrain();
             NoiseType noiseType = terrain.getNoiseType();
@@ -140,7 +139,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
             int startX = chunk.getPos().getStartX();
             int startZ = chunk.getPos().getStartZ();
             int minY = chunk.getBottomY();
-            int maxY = chunk.getTopYInclusive();
+            int maxY = chunk.getTopY() - 1;
 
             BlockState stone = Blocks.STONE.getDefaultState();
             BlockState water = Blocks.WATER.getDefaultState();
@@ -207,7 +206,7 @@ public class CustomChunkGenerator extends ChunkGenerator {
                              NoiseConfig noiseConfig, Chunk chunk) {
         int startX = chunk.getPos().getStartX();
         int startZ = chunk.getPos().getStartZ();
-        long seed = noiseConfig.getLegacyWorldSeed();
+        long seed = this.worldSeed;
 
         BlockState grass = Blocks.GRASS_BLOCK.getDefaultState();
         BlockState dirt = Blocks.DIRT.getDefaultState();
@@ -256,6 +255,11 @@ public class CustomChunkGenerator extends ChunkGenerator {
     @Override
     public void populateEntities(ChunkRegion region) {
         // Default entity population – delegated to vanilla mob spawning
+    }
+
+    @Override
+    public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+        text.add("CustomWorldGen ChunkGenerator");
     }
 
     @Override

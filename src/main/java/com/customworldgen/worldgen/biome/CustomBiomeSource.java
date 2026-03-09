@@ -76,7 +76,7 @@ public class CustomBiomeSource extends BiomeSource {
     }
 
     @Override
-    protected Stream<RegistryEntry<Biome>> biomes() {
+    protected Stream<RegistryEntry<Biome>> biomeStream() {
         return availableBiomes.stream();
     }
 
