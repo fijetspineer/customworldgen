@@ -4,9 +4,9 @@
   "package": "com.customworldgen.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "CreateWorldScreenMixin"
   ],
   "client": [
+    "CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,6 @@
 package com.customworldgen;
 
+import com.customworldgen.command.WorldGenCommands;
 import com.customworldgen.config.PresetManager;
 import com.customworldgen.config.WorldGenConfig;
 import net.fabricmc.api.ModInitializer;
@@ -23,7 +24,7 @@ public class CustomWorldGenMod implements ModInitializer {
         presetManager.initialize();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            // Commands will be registered by the command module
+            WorldGenCommands.register(dispatcher);
         });
 
         LOGGER.info("Custom World Gen initialized");
