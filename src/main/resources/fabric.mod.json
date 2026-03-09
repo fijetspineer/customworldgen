@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "customworldgen",
+  "version": "${version}",
+  "name": "Custom World Generation",
+  "description": "Fully customizable world generation with advanced procedural generation controls",
+  "authors": [
+    "CustomWorldGen Team"
+  ],
+  "contact": {
+    "homepage": "https://github.com/fijetspineer/customworldgen",
+    "sources": "https://github.com/fijetspineer/customworldgen"
+  },
+  "license": "MIT",
+  "icon": "assets/customworldgen/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.customworldgen.CustomWorldGenMod"
+    ],
+    "client": [
+      "com.customworldgen.CustomWorldGenClient"
+    ]
+  },
+  "mixins": [
+    "customworldgen.mixins.json"
+  ],
+  "accessWidener": "customworldgen.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {}
+}
