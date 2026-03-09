@@ -1,0 +1,61 @@
+{
+  "name": "example_custom",
+  "description": "An example custom world generation preset demonstrating all configuration options",
+  "config": {
+    "terrain": {
+      "baseHeight": 72,
+      "terrainScale": 1.2,
+      "noiseType": "SIMPLEX",
+      "mountainFrequency": 0.7,
+      "mountainHeight": 1.5,
+      "valleyDepth": 0.6,
+      "floatingIslands": false,
+      "floatingIslandDensity": 0.3,
+      "caveDensity": 0.5,
+      "caveType": "CHEESE",
+      "undergroundBiomes": true
+    },
+    "biome": {
+      "biomeSize": 5,
+      "temperatureOffset": 0.0,
+      "humidityOffset": 0.0,
+      "biomeRarity": 1.0,
+      "disabledBiomes": [],
+      "forcedBiomes": [],
+      "biomeBlending": 1.5
+    },
+    "structure": {
+      "villageRate": 1.2,
+      "strongholdRate": 1.0,
+      "mineshaftRate": 0.8,
+      "templeRate": 1.0,
+      "ancientCityRate": 0.5,
+      "structureDensity": 1.0,
+      "minStructureDistance": 10
+    },
+    "resource": {
+      "oreFrequency": 1.0,
+      "oreMinHeight": -64,
+      "oreMaxHeight": 256,
+      "clusterSize": 1.0,
+      "scarcityPreset": "normal"
+    },
+    "environment": {
+      "dayLengthTicks": 24000,
+      "weatherFrequency": 1.0,
+      "riverFrequency": 1.2,
+      "oceanSize": 1.0,
+      "lavaOceans": false,
+      "gravityMultiplier": 1.0
+    },
+    "advanced": {
+      "skylandsMode": false,
+      "amplifiedMode": false,
+      "amplifiedScale": 1.0,
+      "multiLayerTerrain": false,
+      "terrainLayers": 1,
+      "biomeBlendRadius": 4.0
+    }
+  },
+  "createdTimestamp": 1700000000000
+}
